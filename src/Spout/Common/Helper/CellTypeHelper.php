@@ -62,6 +62,7 @@ class CellTypeHelper
     {
         return (
             $value instanceof \DateTime ||
+            $value instanceof \DateTimeImmutable ||
             $value instanceof \DateInterval
         );
     }
