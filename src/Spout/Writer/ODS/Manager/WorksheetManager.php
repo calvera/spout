@@ -196,6 +196,10 @@ class WorksheetManager implements WorksheetManagerInterface
             }
 
             $data .= '</table:table-cell>';
+        } elseif ($cell->isDate()) {
+            $data .= ' office:value-type="string" calcext:value-type="string">';
+            $data .= '<text:p>' . ($cell->getValue() instanceof \DateTime ? $cell->getValue()->format(\DateTime::ATOM) : $cell->getValue()) . '</text:p>';
+            $data .= '</table:table-cell>';
         } elseif ($cell->isBoolean()) {
             $value = $cell->getValue() ? 'true' : 'false'; // boolean-value spec: http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#datatype-boolean
             $data .= ' office:value-type="boolean" calcext:value-type="boolean" office:boolean-value="' . $value . '">';
